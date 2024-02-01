@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+
+<div class="container">
+   <div class="example-wrapper">
+        <h1>Choisir sa utilisateur</h1>
+
+{# {{ dump(section) }}
+{{ dump(promo) }}
+{{ dump(utilisateur) }} #}
+
+<h2>{{ section.nom }}</h2>
+
+        {% for utilisateur in utilisateur %}
+            <li>
+                <a href="{{ path('app_reservation_user', {id : utilisateur.id}) }}">{{ utilisateur.nom }} {{utilisateur.prenom}}</a>
+              
+            </li>
+        {% endfor %}
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Reservation</h1>
+
+    <div class="card text-center">
+        <div class="card-header">
+            {{ reservation.repasMenu.jourMenu.dateJour | date("l d/m/Y") }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ reservation.repasMenu.typeRepas.type }}</h5>
+          <p class="card-text">{{ reservation.repasMenu.description }}</p>
+        </div>
+        <div class="card-footer text-muted">
+         <p> {{ reservation.utilisateur.nom }} {{ reservation.utilisateur.prenom }} </p>
+        </div>
+      </div>
+
+    <a href="{{ path('app_reservation_index') }}">Retourner à la liste des réservations</a>
+
+    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Modifier la réservation</a>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+{% endblock %}

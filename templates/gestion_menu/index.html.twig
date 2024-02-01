@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RepasMenu index{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <span class="navbar-brand">
+       <!-- <img src="#" alt="Logo" width="30" height="30" class="d-inline-block align-top"> -->
+        Reservation Repas
+    </span>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_accueil')}}">Retour Accueil</a>
+            </li>
+            <li>
+                <a href="{{ path('app_gestion_menu_new') }}" class="nav-link">Création de menu</a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_reservation_index') }}" class="nav-link">Visualisation des reservations</a>
+            </li>
+
+            <li class="nav-item dropdown">
+            <li class="nav-item">
+                <a class="nav-link" href="">Informations</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+</header>
+
+
+<div class="container">
+    <h1 class="mb-4 text-center">RepasMenu index</h1>
+
+    <div class="d-flex justify-content-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type Repas</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Numéro de semaine</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for repas_menu in repas_menus %}
+                <tr>
+                    <td>{{ repas_menu.typeRepas.type}}</td>
+                    <td>{{ repas_menu.jourMenu.dateJour| date('l d/m/y')}}</td>
+                    <td>{{ repas_menu.description }}</td>
+                    <td>{{ repas_menu.jourMenu.semaineResa.numeroSemaine }}</td>
+                    <td>
+                        <a href="{{ path('app_gestion_menu_show', {'id': repas_menu.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{ path('app_gestion_menu_edit', {'id': repas_menu.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('app_gestion_menu_new') }}" class="btn btn-success">Create new</a>
+    </div>
+</div>
+{% endblock %}

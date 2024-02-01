@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Vos Reservation</h1>
+<p>Liste des réservation d'un utilisateur </p>
+
+{# code récuperer #}
+
+<div class="container">
+    <div class="row">
+    
+        <!-- Contenu principal -->
+        <div class="col-md-9">
+            <h1 class="mb-4 text-center">Liste des reservations</h1>
+
+            <div class="d-flex justify-content-center">
+                <table class="table table-striped">
+                    <!-- Le reste de votre code ici -->
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.utilisateur.nom }}</td>
+                            <td>{{ reservation.utilisateur.prenom }}</td>
+                            <td>{{ reservation.utilisateur.promo.section.nom }}</td>
+                            <td>{{ reservation.repasMenu.jourMenu.dateJour| date('l d/m/Y') }}</td>
+                            <td>{{ reservation.repasMenu.description }}</td>
+                            <td>
+                                <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-primary btn-sm">Consulter</a>
+                                <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <a href="{{ path('app_reservation_new', {'userId': utilisateur.id}) }}" class="btn btn-success">Réserver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

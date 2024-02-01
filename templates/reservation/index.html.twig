@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+
+<header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <span class="navbar-brand">
+       <!-- <img src="#" alt="Logo" width="30" height="30" class="d-inline-block align-top"> -->
+        Reservation Repas
+    </span>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_accueil')}}">Retour Acceuil</a>
+            </li>
+            <li class="nav-item dropdown">
+            <li class="nav-item">
+                <a class="nav-link" href="">Informations</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <!-- Menu latéral -->
+        <div class="col-md-3">
+            <div class="list-group">
+                {% for section in allSection %}
+                <a href="{{ path('app_reservation_section', {id : section.id}) }}" class="list-group-item list-group-item-action">{{ section.nom }}</a>
+                <!-- Ajoutez plus d'éléments de menu ici -->
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="col-md-9">
+            <h1 class="mb-4 text-center">Liste des reservations</h1>
+
+            <div class="d-flex justify-content-center">
+                <table class="table table-striped">
+                    <!-- Le reste de votre code ici -->
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.utilisateur.nom }}</td>
+                            <td>{{ reservation.utilisateur.prenom }}</td>
+                            <td>{{ reservation.utilisateur.promo.section.nom }}</td>
+                            <td>
+                                <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-primary btn-sm">Consulter</a>
+                                <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <a href="{{ path('app_reservation_new') }}" class="btn btn-success">Réserver</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

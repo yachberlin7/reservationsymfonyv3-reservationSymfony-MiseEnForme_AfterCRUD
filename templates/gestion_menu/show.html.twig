@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RepasMenu{% endblock %}
+
+{% block body %}
+    <h1>RepasMenu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ repas_menu.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ repas_menu.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gestion_menu_index') }}">back to list</a>
+
+    <a href="{{ path('app_gestion_menu_edit', {'id': repas_menu.id}) }}">edit</a>
+
+    {{ include('gestion_menu/_delete_form.html.twig') }}
+{% endblock %}

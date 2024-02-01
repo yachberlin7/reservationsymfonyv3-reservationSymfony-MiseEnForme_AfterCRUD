@@ -1,0 +1,16 @@
+
+<div class="container">
+<div class="d-flex justify-content-center">
+    
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+
+    <div class="mb-3">
+        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <!-- Répétez pour chaque champ de formulaire -->
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+
+</div>
+</div>
